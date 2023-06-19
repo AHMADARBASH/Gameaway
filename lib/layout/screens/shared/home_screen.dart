@@ -1,0 +1,33 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gameaway/blocs/nav_bar_index/index_cubit.dart';
+import 'package:gameaway/blocs/nav_bar_index/index_state.dart';
+import 'package:gameaway/layout/screens/bottom_bar/favotites.dart';
+import '../bottom_bar/free_to_play.dart';
+import 'package:gameaway/layout/screens/bottom_bar/giveaways.dart';
+import 'package:gameaway/layout/screens/bottom_bar/settings.dart';
+import 'package:gameaway/layout/widgets/bottom_nav_bar.dart';
+import '../../screens/bottom_bar/news_screen.dart';
+
+class HomeScreen extends StatelessWidget {
+  static const String routeName = '/';
+  HomeScreen({super.key});
+  final List<Widget> _pages = [
+    const GiveawaysScreen(),
+    const FreetoPlayScreen(),
+    const FavoritesScreen(),
+    const NewsScreen(),
+    const SettingsScreen(),
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<BottomNavBarCubit, BottomNavbarState>(
+      builder: (context, state) => SafeArea(
+        child: Scaffold(
+          body: _pages[state.index],
+          bottomNavigationBar: const NavBar(),
+        ),
+      ),
+    );
+  }
+}
