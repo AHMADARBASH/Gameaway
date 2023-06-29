@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gameaway/blocs/nav_bar_index/index_cubit.dart';
 import 'package:gameaway/blocs/nav_bar_index/index_state.dart';
 import 'package:gameaway/layout/screens/bottom_bar/favotites.dart';
@@ -19,13 +20,28 @@ class HomeScreen extends StatelessWidget {
     const NewsScreen(),
     const SettingsScreen(),
   ];
+  DateTime timeBackPressed = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BottomNavBarCubit, BottomNavbarState>(
       builder: (context, state) => SafeArea(
-        child: Scaffold(
-          body: _pages[state.index],
-          bottomNavigationBar: const NavBar(),
+        child: WillPopScope(
+          onWillPop: () async {
+            var difference = DateTime.now().difference(timeBackPressed);
+            var isExitWarning = difference >= Duration(seconds: 2);
+            timeBackPressed = DateTime.now();
+            if (isExitWarning) {
+              Fluttertoast.showToast(msg: 'Press back again to exit');
+              return false;
+            } else {
+              Fluttertoast.cancel();
+              return true;
+            }
+          },
+          child: Scaffold(
+            body: _pages[state.index],
+            bottomNavigationBar: const NavBar(),
+          ),
         ),
       ),
     );
