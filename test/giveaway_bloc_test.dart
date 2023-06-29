@@ -1,10 +1,7 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gameaway/blocs/giveaways/giveaways_cubit.dart';
 import 'package:gameaway/blocs/giveaways/giveaways_states.dart';
-import 'package:gameaway/data/Models/news.dart';
 import 'package:gameaway/data/Models/giveaway.dart';
-import 'package:gameaway/data/Models/freetoplay.dart';
 import 'package:gameaway/data/repositories/giveaways_repository.dart';
 import 'package:gameaway/utilities/exceptions.dart';
 import 'package:mocktail/mocktail.dart';
