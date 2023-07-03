@@ -10,6 +10,7 @@ Map<String, dynamic> themes = {
       primary: Colors.blue,
       secondary: Colors.white,
     ),
+    fontFamily: GoogleFonts.bebasNeue().fontFamily,
     textTheme: TextTheme(
       bodyMedium: GoogleFonts.bebasNeue(color: Colors.black),
       bodySmall: GoogleFonts.bebasNeue(color: Colors.black),
@@ -24,6 +25,7 @@ Map<String, dynamic> themes = {
       primary: Colors.blue,
       secondary: Colors.blueGrey[900],
     ),
+    fontFamily: GoogleFonts.bebasNeue().fontFamily,
     textTheme: TextTheme(
       bodyMedium: GoogleFonts.bebasNeue(color: Colors.white),
       bodySmall: GoogleFonts.bebasNeue(color: Colors.white),

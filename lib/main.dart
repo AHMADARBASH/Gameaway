@@ -26,6 +26,7 @@ void main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await DatabaseHelper.createDatabase();
   await LocalData.init();
+  await Future.delayed(const Duration(seconds: 1));
   runApp(Gameaway());
 }
 
