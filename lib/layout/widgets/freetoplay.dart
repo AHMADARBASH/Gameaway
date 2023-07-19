@@ -72,9 +72,7 @@ class _FreetoPlayWidgetState extends State<FreetoPlayWidget> {
                   ),
                 ),
                 const Spacer(),
-                BlocConsumer<FreetoPlayFavoritesCubit,
-                    FreetoPlayFavoritesState>(
-                  listener: (context, state) {},
+                BlocBuilder<FreetoPlayFavoritesCubit, FreetoPlayFavoritesState>(
                   builder: (context, state) => Container(
                     margin: const EdgeInsets.all(5),
                     decoration: BoxDecoration(

@@ -122,8 +122,7 @@ class _FreetoPlayDetailsScreenState extends State<FreetoPlayDetailsScreen> {
           ),
         ),
         actions: [
-          BlocConsumer<FreetoPlayFavoritesCubit, FreetoPlayFavoritesState>(
-            listener: (context, state) {},
+          BlocBuilder<FreetoPlayFavoritesCubit, FreetoPlayFavoritesState>(
             builder: (context, state) => FadeInRight(
               delay: const Duration(milliseconds: 200),
               duration: duration,

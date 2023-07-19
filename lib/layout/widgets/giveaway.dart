@@ -91,8 +91,7 @@ class _GiveawayWidgetState extends State<GiveawayWidget> {
                   ),
                 ),
                 const Spacer(),
-                BlocConsumer<GiveawayFavoritesCubit, GiveawayFavoritesState>(
-                  listener: (context, state) {},
+                BlocBuilder<GiveawayFavoritesCubit, GiveawayFavoritesState>(
                   builder: (context, state) => Container(
                     margin: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
