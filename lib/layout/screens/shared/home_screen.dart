@@ -30,9 +30,12 @@ class HomeScreen extends StatelessWidget {
         child: WillPopScope(
           onWillPop: () async {
             var difference = DateTime.now().difference(timeBackPressed);
-            var isExitWarning = difference >= Duration(seconds: 2);
+            var isExitWarning = difference >= const Duration(seconds: 2);
             timeBackPressed = DateTime.now();
-            if (isExitWarning) {
+            if (state.index > 0) {
+              context.read<BottomNavBarCubit>().changeNavBarIndex(0);
+              return false;
+            } else if (isExitWarning) {
               Fluttertoast.showToast(msg: 'Press back again to exit');
               return false;
             } else {

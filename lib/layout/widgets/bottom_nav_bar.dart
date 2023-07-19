@@ -17,6 +17,7 @@ class NavBar extends StatefulWidget {
 class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
+    final activeIndex = context.watch<BottomNavBarCubit>().state.index;
     final textColor = Theme.of(context).textTheme.bodyMedium!.color;
     final textstyle =
         GoogleFonts.bebasNeue(fontSize: 12.sp, color: Colors.blue);
@@ -40,6 +41,7 @@ class _NavBarState extends State<NavBar> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(50),
           child: GNav(
+            selectedIndex: activeIndex,
             onTabChange: (index) {
               BlocProvider.of<BottomNavBarCubit>(context)
                   .changeNavBarIndex(index);
