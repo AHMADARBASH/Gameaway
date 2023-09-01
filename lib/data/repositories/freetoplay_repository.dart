@@ -3,15 +3,23 @@ import 'package:gameaway/data/repositories/base_repository.dart';
 
 class FreetoPlayRepository extends BaseRepository {
   Future<List<FreetoPlay>> getAllFreetoPlay() async {
-    final data = await super
-        .getfreetoplay(customeUrl: 'https://www.freetogame.com/api/games');
+    List<FreetoPlay> data = [];
+    List<dynamic> apiData = await super
+        .getDatafromAPI(customURL: 'https://www.freetogame.com/api/games');
+    for (var element in apiData) {
+      data.add(FreetoPlay.fromJson(element));
+    }
     return data;
   }
 
   Future<List<FreetoPlay>> getfreetoplaybycategory(
       {required String category}) async {
-    final data = await super.getfreetoplay(
-        customeUrl: 'https://www.freetogame.com/api/games?category=$category');
+    List<FreetoPlay> data = [];
+    List<dynamic> apiData = await super.getDatafromAPI(
+        customURL: 'https://www.freetogame.com/api/games?category=$category');
+    for (var element in apiData) {
+      data.add(FreetoPlay.fromJson(element));
+    }
     return data;
   }
 }

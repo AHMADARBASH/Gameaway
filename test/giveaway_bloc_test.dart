@@ -9,7 +9,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class MockGiveawaysRepository extends Mock implements GiveawaysRepository {
-  @override
   Future<List<Giveaway>> getGiveaways({required String customeUrl}) async {
     final url = Uri.parse(customeUrl);
     final response = await http.get(url);
