@@ -86,7 +86,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                 child: Text(
                   _currentPage == 3 ? 'START' : 'NEXT',
                   style: TextStyle(
-                      color: Colors.blue[600],
+                      color: context.primaryColor,
                       fontWeight: FontWeight.bold,
                       fontSize: context.isTablet ? 10.sp : 15.sp),
                 ),
@@ -173,7 +173,7 @@ class DotIndicator extends StatelessWidget {
       height: 6,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
-          color: isActive ? Colors.blue : Colors.grey),
+          color: isActive ? context.primaryColor : Colors.grey),
     );
   }
 }

@@ -76,8 +76,8 @@ class _NewsScreenState extends State<NewsScreen> {
                     SizedBox(
                       height: 15.h,
                     ),
-                    const SpinKitFadingCircle(
-                      color: Colors.blue,
+                    SpinKitFadingCircle(
+                      color: context.primaryColor,
                     ),
                     SizedBox(
                       height: 20.h,

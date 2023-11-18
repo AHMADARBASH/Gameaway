@@ -35,7 +35,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
           border: widget.globalIndex == widget.categories[widget.index]['index']
-              ? Border.all(color: Colors.blue, width: 2)
+              ? Border.all(color: context.primaryColor, width: 2)
               : Border.all(color: Colors.transparent, width: 1),
           color: Theme.of(context).colorScheme.secondary,
           boxShadow: [boxShadow]),

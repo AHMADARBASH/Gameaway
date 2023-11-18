@@ -110,9 +110,9 @@ class _FreetoPlayDetailsScreenState extends State<FreetoPlayDetailsScreen> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              icon: const Icon(
+              icon: Icon(
                 Icons.arrow_back_ios,
-                color: Colors.blue,
+                color: context.primaryColor,
               ),
             ),
           ),
@@ -495,7 +495,7 @@ class _FreetoPlayDetailsScreenState extends State<FreetoPlayDetailsScreen> {
                                             const Duration(milliseconds: 400),
                                         child: Container(
                                           decoration: BoxDecoration(
-                                              color: Colors.blue,
+                                              color: context.primaryColor,
                                               borderRadius:
                                                   BorderRadius.circular(5)),
                                           width: 15.w,
@@ -543,10 +543,11 @@ class _FreetoPlayDetailsScreenState extends State<FreetoPlayDetailsScreen> {
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              color:
-                                                  Colors.blue.withOpacity(0.2),
+                                              color: context.primaryColor
+                                                  .withOpacity(0.2),
                                               border: Border.all(
-                                                color: Colors.blue[600]!,
+                                                color:
+                                                    context.primaryColor[600]!,
                                                 width: 1,
                                               ),
                                             ),
@@ -554,7 +555,7 @@ class _FreetoPlayDetailsScreenState extends State<FreetoPlayDetailsScreen> {
                                             height: 11.h,
                                             child: Icon(
                                               FontAwesome.gamepad,
-                                              color: Colors.blue[600],
+                                              color: context.primaryColor[600],
                                               size: 30.sp,
                                             ),
                                           ),
@@ -649,12 +650,13 @@ class _FreetoPlayDetailsScreenState extends State<FreetoPlayDetailsScreen> {
                                           width: double.infinity,
                                           height: 6.h,
                                           decoration: BoxDecoration(
-                                              color:
-                                                  Colors.blue.withOpacity(0.3),
+                                              color: context.primaryColor
+                                                  .withOpacity(0.3),
                                               borderRadius:
                                                   BorderRadius.circular(25),
                                               border: Border.all(
-                                                  color: Colors.blue[600]!,
+                                                  color: context
+                                                      .primaryColor[600]!,
                                                   width: 1)),
                                           alignment: Alignment.center,
                                           child: Row(
@@ -664,13 +666,15 @@ class _FreetoPlayDetailsScreenState extends State<FreetoPlayDetailsScreen> {
                                               Text(
                                                 'Game URL  ',
                                                 style: GoogleFonts.bebasNeue(
-                                                  color: Colors.blue[600],
+                                                  color:
+                                                      context.primaryColor[600],
                                                   fontSize: 20.sp,
                                                 ),
                                               ),
                                               Icon(
                                                 FontAwesome5.external_link_alt,
-                                                color: Colors.blue[600],
+                                                color:
+                                                    context.primaryColor[600],
                                               )
                                             ],
                                           ),

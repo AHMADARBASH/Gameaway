@@ -92,7 +92,7 @@ class _FreetoPlayWidgetState extends State<FreetoPlayWidget> {
                         state.ids.contains(widget.freetoPlay.id)
                             ? Icons.favorite
                             : Icons.favorite_border,
-                        color: Colors.blue,
+                        color: context.primaryColor,
                       ),
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,

@@ -60,7 +60,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                     duration: const Duration(milliseconds: 800),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.blue,
+                      color: context.primaryColor,
                     ),
                   ),
                 ),

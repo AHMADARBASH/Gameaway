@@ -213,8 +213,8 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                             SizedBox(
                               height: 15.h,
                             ),
-                            const SpinKitFadingCircle(
-                              color: Colors.blue,
+                            SpinKitFadingCircle(
+                              color: context.primaryColor,
                             ),
                             SizedBox(
                               height: 20.h,
@@ -337,9 +337,9 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                         child: Text(''),
                       );
                     } else if (state is DLCsLoadingState) {
-                      return const Center(
+                      return Center(
                         child: SpinKitFadingCircle(
-                          color: Colors.blue,
+                          color: context.primaryColor,
                         ),
                       );
                     } else if (state is DLCsEmptyState) {
@@ -399,7 +399,8 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                                               MainAxisAlignment.center,
                                           children: [
                                             CircleAvatar(
-                                              backgroundColor: Colors.blue[600],
+                                              backgroundColor:
+                                                  context.primaryColor[600],
                                               child: const Icon(
                                                 Icons.double_arrow,
                                                 color: Colors.white,

@@ -162,8 +162,8 @@ class _FreetoPlayScreenState extends State<FreetoPlayScreen> {
                             SizedBox(
                               height: 15.h,
                             ),
-                            const SpinKitFadingCircle(
-                              color: Colors.blue,
+                            SpinKitFadingCircle(
+                              color: context.primaryColor,
                             ),
                             SizedBox(
                               height: 20.h,
