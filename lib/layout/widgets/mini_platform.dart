@@ -34,7 +34,6 @@ class MiniPlatform extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Theme.of(context).canvasColor,
             ),
             width: 40.sp,
             height: 40.sp,

@@ -8,6 +8,7 @@ import 'package:gameaway/blocs/favorites/giveaway/giveaways_favorites_cubit.dart
 import 'package:gameaway/blocs/favorites/giveaway/giveaways_favorites_states.dart';
 import 'package:gameaway/layout/widgets/freetoplay.dart';
 import 'package:gameaway/layout/widgets/giveaway.dart';
+import 'package:gameaway/utilities/context_extenstions.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
@@ -40,7 +41,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             style: Theme.of(context)
                 .textTheme
                 .bodyMedium!
-                .copyWith(fontSize: 20.sp),
+                .copyWith(fontSize: context.isTablet ? 12.sp : 20.sp),
           ),
         ),
         body: Column(
@@ -50,14 +51,10 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                 AnimatedPositioned(
                   curve: Curves.easeOutQuart,
                   duration: const Duration(milliseconds: 800),
-                  left: _isGiveaway
-                      ? 10.w
-                      : (MediaQuery.of(context).size.width / 2),
+                  left: _isGiveaway ? 10.w : (context.width / 2),
                   top: 0,
                   bottom: 0,
-                  right: _isGiveaway
-                      ? (MediaQuery.of(context).size.width / 2)
-                      : 10.w,
+                  right: _isGiveaway ? (context.width / 2) : 10.w,
                   child: AnimatedContainer(
                     curve: Curves.easeOutQuart,
                     duration: const Duration(milliseconds: 800),
@@ -68,8 +65,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   ),
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    const Expanded(child: SizedBox.shrink()),
                     GestureDetector(
                       onTap: () {
                         setState(() {
@@ -88,6 +85,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                         ),
                       ),
                     ),
+                    const Expanded(child: SizedBox.shrink()),
                     GestureDetector(
                       onTap: () {
                         setState(() {
@@ -106,6 +104,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                         ),
                       ),
                     ),
+                    const Expanded(child: SizedBox.shrink()),
                   ],
                 ),
               ],
@@ -120,7 +119,10 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                       child: state is GiveawayFavoritesEmptyState
                           ? Column(
                               children: [
-                                Image.asset('assets/images/void.png'),
+                                Image.asset(
+                                  'assets/images/void.png',
+                                  height: 130.sp,
+                                ),
                                 Text(
                                   'you don\'t have favorite items',
                                   style: GoogleFonts.bebasNeue(fontSize: 15.sp),
@@ -128,7 +130,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                               ],
                             )
                           : SizedBox(
-                              height: 72.h,
+                              height: 170.sp,
                               child: ListView.builder(
                                 itemCount: state.favorites.length,
                                 itemBuilder: (context, index) => GiveawayWidget(
@@ -146,7 +148,10 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                       child: state is FreetoPlayFavoritesEmptyState
                           ? Column(
                               children: [
-                                Image.asset('assets/images/void.png'),
+                                Image.asset(
+                                  'assets/images/void.png',
+                                  height: 130.sp,
+                                ),
                                 Text(
                                   'you don\'t have favorite items',
                                   style: GoogleFonts.bebasNeue(fontSize: 15.sp),
@@ -154,7 +159,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                               ],
                             )
                           : SizedBox(
-                              height: 72.h,
+                              height: 145.sp,
                               child: ListView.builder(
                                 itemCount: state.favorites.length,
                                 itemBuilder: (context, index) =>

@@ -95,24 +95,24 @@ final List<Map<String, dynamic>> categories = [
     "name": "tower-defense",
     "logo": "assets/images/towerdefence.png",
     "color": Colors.blue,
-    "index": 1
+    "index": 16
   },
   {
     "name": "low-spec",
     "logo": "assets/images/low-spec.png",
     "color": Colors.blue,
-    "index": 16
+    "index": 17
   },
   {
     "name": "flight",
     "logo": "assets/images/flight.png",
     "color": Colors.blue,
-    "index": 17
+    "index": 18
   },
   {
     "name": "sci-fi",
     "logo": "assets/images/sci-fi.png",
     "color": Colors.blue,
-    "index": 18
+    "index": 19
   },
 ];

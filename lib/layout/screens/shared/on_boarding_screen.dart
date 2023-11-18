@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gameaway/data/helpers/local_data.dart';
 import 'package:gameaway/layout/screens/shared/home_screen.dart';
+import 'package:gameaway/utilities/context_extenstions.dart';
+import 'package:sizer/sizer.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -57,9 +59,9 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                 child: Text(
                   'SKIP',
                   style: TextStyle(
-                    color: Colors.grey[600],
-                    fontWeight: FontWeight.bold,
-                  ),
+                      color: Colors.grey[600],
+                      fontWeight: FontWeight.bold,
+                      fontSize: context.isTablet ? 10.sp : 15.sp),
                 ),
                 onPressed: () {
                   LocalData.saveData(key: 'opened', data: 'opened');
@@ -84,9 +86,9 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                 child: Text(
                   _currentPage == 3 ? 'START' : 'NEXT',
                   style: TextStyle(
-                    color: Colors.blue[600],
-                    fontWeight: FontWeight.bold,
-                  ),
+                      color: Colors.blue[600],
+                      fontWeight: FontWeight.bold,
+                      fontSize: context.isTablet ? 10.sp : 15.sp),
                 ),
                 onPressed: () {
                   if (_currentPage == 3) {
@@ -133,7 +135,7 @@ class OnboardingPage extends StatelessWidget {
         children: [
           Image.asset(
             image,
-            height: MediaQuery.of(context).size.height * 0.4,
+            height: context.height * 0.4,
           ),
           const SizedBox(height: 32.0),
           Text(

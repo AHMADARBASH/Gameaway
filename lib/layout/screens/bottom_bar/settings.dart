@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gameaway/blocs/theme/theme_cubit.dart';
 import 'package:gameaway/blocs/theme/theme_state.dart';
 import 'package:gameaway/data/helpers/local_data.dart';
+import 'package:gameaway/utilities/context_extenstions.dart';
 import 'package:gameaway/utilities/themes.dart';
 import 'package:sizer/sizer.dart';
 
@@ -31,11 +32,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium!
-                  .copyWith(fontSize: 20.sp),
+                  .copyWith(fontSize: context.isTablet ? 15.sp : 20.sp),
             ),
           ),
           body: Column(
             children: [
+              SizedBox(
+                height: 10.sp,
+              ),
               BlocBuilder<ThemeCubit, ThemeState>(
                 builder: (context, state) => ListTile(
                   leading: Icon(
@@ -48,7 +52,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     style: Theme.of(context)
                         .textTheme
                         .bodyMedium!
-                        .copyWith(fontSize: 15.sp),
+                        .copyWith(fontSize: context.isTablet ? 12.sp : 15.sp),
                   ),
                   trailing: ThemeSwitcher(
                     builder: (context) => Switch(
@@ -78,26 +82,46 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 10.sp,
+              ),
               ListTile(
                 onTap: () {
                   showDialog(
                       context: context,
+                      barrierDismissible: true,
                       builder: (_) => AlertDialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                10.sp,
+                              ),
+                            ),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text(
+                                    'OK',
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                        fontSize:
+                                            context.isTablet ? 10.sp : 12.sp),
+                                  ))
+                            ],
                             backgroundColor:
                                 Theme.of(context).colorScheme.secondary,
-                            title: Text(
-                              'about the app',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(fontSize: 15.sp),
-                            ),
                             content: Text(
                               'all rights resreved to Aplus Technologis\nfor any concern please contact at:\nAPlus.Technologies779@gmail.com',
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyMedium!
-                                  .copyWith(fontSize: 13.sp),
+                                  .copyWith(
+                                      fontSize:
+                                          context.isTablet ? 12.sp : 15.sp,
+                                      fontWeight: FontWeight.normal),
                             ),
                           ));
                 },
@@ -111,7 +135,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
-                      .copyWith(fontSize: 15.sp),
+                      .copyWith(fontSize: context.isTablet ? 12.sp : 15.sp),
                 ),
               )
             ],

@@ -23,6 +23,7 @@ class NewsCubit extends Cubit<NewsState> {
     } on SocketException catch (_) {
       emit(NewsErrorState(errorMessage: 'Connection Error'));
     } catch (_) {
+      print('-----------------------------------\n ${_.toString()}');
       emit(NewsErrorState(errorMessage: 'Unkown Error'));
     }
   }

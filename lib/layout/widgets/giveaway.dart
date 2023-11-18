@@ -4,6 +4,7 @@ import 'package:gameaway/blocs/favorites/giveaway/giveaways_favorites_cubit.dart
 import 'package:gameaway/blocs/favorites/giveaway/giveaways_favorites_states.dart';
 import 'package:gameaway/data/Models/giveaway.dart';
 import 'package:gameaway/layout/screens/giveaway/giveaway_deatail_screen.dart';
+import 'package:gameaway/utilities/context_extenstions.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -60,12 +61,13 @@ class _GiveawayWidgetState extends State<GiveawayWidget> {
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+            padding: EdgeInsets.only(top: 2.sp),
+            margin: EdgeInsets.only(left: 8.sp, right: 8.sp, top: 8.sp),
             width: widget.width,
-            height: 25.h,
+            height: 26.h,
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.secondary,
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(4.sp),
               boxShadow: [boxShadow],
               image: DecorationImage(
                 image: CachedNetworkImageProvider(
@@ -87,7 +89,8 @@ class _GiveawayWidgetState extends State<GiveawayWidget> {
                   ),
                   child: Text(
                     widget.giveaway.worth,
-                    style: GoogleFonts.bebasNeue(fontSize: 12.sp),
+                    style: GoogleFonts.bebasNeue(
+                        fontSize: context.isTablet ? 10.sp : 12.sp),
                   ),
                 ),
                 const Spacer(),
@@ -109,7 +112,7 @@ class _GiveawayWidgetState extends State<GiveawayWidget> {
                         state.ids.contains(widget.giveaway.id)
                             ? Icons.favorite
                             : Icons.favorite_border,
-                        color: Colors.blue,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
@@ -123,23 +126,23 @@ class _GiveawayWidgetState extends State<GiveawayWidget> {
             height: 18.h,
             width: widget.width,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(5.sp),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  padding: const EdgeInsets.all(5),
+                  margin: EdgeInsets.only(top: 5.sp),
+                  padding: EdgeInsets.all(3.sp),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.secondary,
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(3.sp),
                     boxShadow: [boxShadow],
                   ),
                   child: Text(
                     widget.giveaway.title,
                     style: GoogleFonts.bebasNeue(
-                      fontSize: 15.sp,
+                      fontSize: context.isTablet ? 12.sp : 15.sp,
                     ),
                     maxLines: 2,
                   ),
@@ -157,14 +160,14 @@ class _GiveawayWidgetState extends State<GiveawayWidget> {
                       ? Text(
                           'expired',
                           style: GoogleFonts.bebasNeue(
-                            fontSize: 15.sp,
+                            fontSize: context.isTablet ? 12.sp : 15.sp,
                           ),
                         )
                       : widget.giveaway.endDate == 'N/A'
                           ? Text(
                               'expire in: N/A',
                               style: GoogleFonts.bebasNeue(
-                                fontSize: 15.sp,
+                                fontSize: context.isTablet ? 12.sp : 15.sp,
                               ),
                             )
                           : StreamBuilder(
@@ -180,14 +183,18 @@ class _GiveawayWidgetState extends State<GiveawayWidget> {
                                       ? Text(
                                           'expire in: ${snapshot.data!['days']} days',
                                           style: GoogleFonts.bebasNeue(
-                                            fontSize: 15.sp,
+                                            fontSize: context.isTablet
+                                                ? 12.sp
+                                                : 15.sp,
                                           ),
                                           maxLines: 2,
                                         )
                                       : Text(
                                           'expire in: ${snapshot.data?['hours']}:${snapshot.data?['minutes']}:${snapshot.data?['seconds']}',
                                           style: GoogleFonts.bebasNeue(
-                                            fontSize: 15.sp,
+                                            fontSize: context.isTablet
+                                                ? 12.sp
+                                                : 15.sp,
                                           ),
                                         ),
                             ),

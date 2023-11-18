@@ -4,6 +4,7 @@ import 'package:gameaway/blocs/favorites/freetoplay/freetoplay_favorites_cubit.d
 import 'package:gameaway/blocs/favorites/freetoplay/freetoplay_favorites_states.dart';
 import 'package:gameaway/data/Models/freetoplay.dart';
 import 'package:gameaway/layout/screens/freetoplay/freetoplay_details_screen.dart';
+import 'package:gameaway/utilities/context_extenstions.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -38,12 +39,13 @@ class _FreetoPlayWidgetState extends State<FreetoPlayWidget> {
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+            padding: EdgeInsets.only(top: 2.sp),
+            margin: EdgeInsets.only(left: 5.sp, right: 5.sp, top: 5.sp),
             width: widget.width,
             height: 25.h,
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.secondary,
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(5.sp),
               boxShadow: [boxShadow],
               image: DecorationImage(
                 image: CachedNetworkImageProvider(
@@ -60,7 +62,7 @@ class _FreetoPlayWidgetState extends State<FreetoPlayWidget> {
                   padding: const EdgeInsets.all(5),
                   margin: const EdgeInsets.only(left: 8, right: 5, bottom: 10),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
+                    borderRadius: BorderRadius.circular(3.sp),
                     color: Theme.of(context).colorScheme.secondary,
                   ),
                   child: Text(
@@ -68,7 +70,7 @@ class _FreetoPlayWidgetState extends State<FreetoPlayWidget> {
                     style: Theme.of(context)
                         .textTheme
                         .bodyMedium!
-                        .copyWith(fontSize: 12.sp),
+                        .copyWith(fontSize: context.isTablet ? 10.sp : 12.sp),
                   ),
                 ),
                 const Spacer(),
@@ -117,7 +119,7 @@ class _FreetoPlayWidgetState extends State<FreetoPlayWidget> {
                   child: Text(
                     widget.freetoPlay.title,
                     style: GoogleFonts.bebasNeue(
-                      fontSize: 15.sp,
+                      fontSize: context.isTablet ? 12.sp : 15.sp,
                     ),
                     maxLines: 2,
                   ),

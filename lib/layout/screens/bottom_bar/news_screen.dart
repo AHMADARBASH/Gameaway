@@ -5,6 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gameaway/blocs/news/news_cubit.dart';
 import 'package:gameaway/blocs/news/news_states.dart';
 import 'package:gameaway/layout/widgets/news.dart';
+import 'package:gameaway/utilities/context_extenstions.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
@@ -32,8 +33,10 @@ class _NewsScreenState extends State<NewsScreen> {
         elevation: 0,
         title: Text(
           'News',
-          style:
-              Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 20.sp),
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium!
+              .copyWith(fontSize: context.isTablet ? 15.sp : 20.sp),
         ),
       ),
       body: FadeInUp(
@@ -105,16 +108,12 @@ class _NewsScreenState extends State<NewsScreen> {
                 ),
               );
             } else {
-              return SizedBox(
-                height: 100.h,
-                width: 100.w,
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: state.news.length,
-                  itemBuilder: (context, index) => NewsWidget(
-                    width: 95.w,
-                    news: state.news[index],
-                  ),
+              return ListView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount: state.news.length,
+                itemBuilder: (context, index) => NewsWidget(
+                  width: context.width,
+                  news: state.news[index],
                 ),
               );
             }

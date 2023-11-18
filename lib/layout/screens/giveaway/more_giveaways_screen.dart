@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gameaway/blocs/giveaways/giveaways_cubit.dart';
 import 'package:gameaway/blocs/giveaways/giveaways_states.dart';
 import 'package:gameaway/layout/widgets/giveaway.dart';
+import 'package:gameaway/utilities/context_extenstions.dart';
 import 'package:sizer/sizer.dart';
 
 class MoreGiveawaysScreen extends StatefulWidget {
@@ -37,7 +38,7 @@ class _MoreGiveawaysScreenState extends State<MoreGiveawaysScreen> {
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium!
-                  .copyWith(fontSize: 20.sp),
+                  .copyWith(fontSize: context.isTablet ? 15.sp : 20.sp),
             ),
           ),
           body: FadeInUp(

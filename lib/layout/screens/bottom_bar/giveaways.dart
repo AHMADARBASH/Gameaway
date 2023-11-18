@@ -9,7 +9,9 @@ import 'package:gameaway/blocs/giveaways/giveaways_cubit.dart';
 import 'package:gameaway/blocs/giveaways/giveaways_states.dart';
 import 'package:gameaway/layout/screens/giveaway/more_dlcs_screen.dart';
 import 'package:gameaway/layout/screens/giveaway/more_giveaways_screen.dart';
+import 'package:gameaway/layout/widgets/category_widget.dart';
 import 'package:gameaway/layout/widgets/giveaway.dart';
+import 'package:gameaway/utilities/context_extenstions.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import '../../../data/constants/platforms.dart';
@@ -54,6 +56,9 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(
+                height: 1.h,
+              ),
               FadeInDown(
                 curve: Curves.easeOutQuart,
                 duration: const Duration(milliseconds: 500),
@@ -62,9 +67,13 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
-                      .copyWith(fontSize: 20.sp),
+                      .copyWith(fontSize: context.isTablet ? 10.sp : 20.sp),
                 ),
               ),
+              SizedBox(
+                height: 1.h,
+              ),
+              //Top Categories List
               BlocBuilder<DLCsCubit, DLCsState>(
                 builder: (context, dlcsState) =>
                     BlocBuilder<GiveawaysCubit, GiveawaysState>(
@@ -76,88 +85,49 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                       builder: (context, newSetState) => Column(
                         children: [
                           SizedBox(
-                            height: 7.h,
+                            height: context.isTablet ? 5.h : 7.h,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: platforms.length,
                               itemBuilder: (context, index) => InkWell(
-                                borderRadius: BorderRadius.circular(30),
-                                onTap: () async {
-                                  if (state is GiveawayLoadingState ||
-                                      dlcsState is DLCsLoadingState) {
-                                    return;
-                                  }
-                                  if (platformIndex ==
-                                      platforms[index]['index']) {
-                                    platformIndex = 0;
-                                    platformName = '';
-                                    newSetState(() {});
-                                    BlocProvider.of<GiveawaysCubit>(context)
-                                        .getValuableGiveaways();
-                                    BlocProvider.of<DLCsCubit>(context)
-                                        .getValuableDLCs();
-                                  } else {
-                                    platformIndex = platforms[index]['index'];
-                                    platformName = platforms[index]['name'];
-                                    newSetState(() {});
-                                    BlocProvider.of<GiveawaysCubit>(context)
-                                        .getGiveawaysbyPlatform(
-                                            platform: platforms[index]
-                                                ['value']);
-                                    BlocProvider.of<DLCsCubit>(context)
-                                        .getDLCsbyPlatform(
-                                            platform: platforms[index]
-                                                ['value']);
-                                  }
-                                },
-                                child: AnimatedContainer(
-                                  duration: const Duration(milliseconds: 200),
-                                  margin: const EdgeInsets.all(4),
-                                  padding: const EdgeInsets.only(
-                                      right: 8, top: 4, bottom: 4),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30),
-                                      border: platformIndex ==
-                                              platforms[index]['index']
-                                          ? Border.all(
-                                              color: Colors.blue, width: 2)
-                                          : Border.all(
-                                              color: Colors.transparent,
-                                              width: 1),
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                      boxShadow: [boxShadow]),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Theme.of(context).canvasColor,
-                                        ),
-                                        width: 45.sp,
-                                        height: 45.sp,
-                                        child: Center(
-                                          child: Image.asset(
-                                            platforms[index]['logo'],
-                                            width: 30,
-                                            height: 30,
-                                            color: platforms[index]['color'],
-                                          ),
-                                        ),
-                                      ),
-                                      Text(
-                                        ' ${platforms[index]['name']}',
-                                        style: GoogleFonts.bebasNeue(
-                                            fontSize: 12.sp),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
+                                  borderRadius: BorderRadius.circular(30),
+                                  onTap: () async {
+                                    if (state is GiveawayLoadingState ||
+                                        dlcsState is DLCsLoadingState) {
+                                      return;
+                                    }
+                                    if (platformIndex ==
+                                        platforms[index]['index']) {
+                                      platformIndex = 0;
+                                      platformName = '';
+                                      newSetState(() {});
+                                      BlocProvider.of<GiveawaysCubit>(context)
+                                          .getValuableGiveaways();
+                                      BlocProvider.of<DLCsCubit>(context)
+                                          .getValuableDLCs();
+                                    } else {
+                                      platformIndex = platforms[index]['index'];
+                                      platformName = platforms[index]['name'];
+                                      newSetState(() {});
+                                      BlocProvider.of<GiveawaysCubit>(context)
+                                          .getGiveawaysbyPlatform(
+                                              platform: platforms[index]
+                                                  ['value']);
+                                      BlocProvider.of<DLCsCubit>(context)
+                                          .getDLCsbyPlatform(
+                                              platform: platforms[index]
+                                                  ['value']);
+                                    }
+                                  },
+                                  child: CategoryWidget(
+                                    index: index,
+                                    globalIndex: platformIndex,
+                                    categories: platforms,
+                                  )),
                             ),
+                          ),
+                          SizedBox(
+                            height: 5.sp,
                           ),
                           Row(
                             children: [
@@ -165,7 +135,12 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                                 platformName == ''
                                     ? 'Most Valuebale'
                                     : platformName,
-                                style: GoogleFonts.bebasNeue(fontSize: 20.sp),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                        fontSize:
+                                            context.isTablet ? 10.sp : 20.sp),
                               ),
                             ],
                           ),
@@ -175,18 +150,26 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 2.h,
+              ),
               FadeInRight(
                 duration: const Duration(milliseconds: 1000),
                 delay: const Duration(milliseconds: 500),
                 child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.secondary,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [boxShadow]),
-                    child: Text('Games',
-                        style: GoogleFonts.bebasNeue(fontSize: 15.sp))),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.secondary,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [boxShadow]),
+                  child: Text(
+                    'Games',
+                    style: GoogleFonts.bebasNeue(
+                      fontSize: context.isTablet ? 10.sp : 15.sp,
+                    ),
+                  ),
+                ),
               ),
               FadeInRight(
                 duration: const Duration(milliseconds: 1000),
@@ -205,7 +188,8 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                             Text(
                               state.errorMessage,
                               style: GoogleFonts.bebasNeue(
-                                  fontSize: 20.sp, fontWeight: FontWeight.bold),
+                                  fontSize: context.isTablet ? 20.sp : 15.sp,
+                                  fontWeight: FontWeight.bold),
                             ),
                             IconButton(
                               onPressed: () {
@@ -254,7 +238,7 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                               state.emptyMessage,
                               textAlign: TextAlign.center,
                               style: GoogleFonts.bebasNeue(
-                                fontSize: 20.sp,
+                                fontSize: context.isTablet ? 20.sp : 15.sp,
                               ),
                             ),
                           ],
@@ -262,8 +246,7 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                       );
                     } else {
                       return SizedBox(
-                        height: 45.h,
-                        width: 100.w,
+                        height: context.isTablet ? 46.h : 50.h,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: state.giveaways.length > 6
@@ -272,6 +255,8 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                           itemBuilder: (context, index) =>
                               state.giveaways.length > 6 && index == 5
                                   ? Container(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 10.sp),
                                       margin: EdgeInsets.only(
                                           top: 1.h, bottom: 5.h, left: 2.h),
                                       decoration: BoxDecoration(
@@ -281,7 +266,6 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                                           borderRadius:
                                               BorderRadius.circular(15),
                                           boxShadow: [boxShadow]),
-                                      width: 20.w,
                                       child: InkWell(
                                         borderRadius: BorderRadius.circular(10),
                                         onTap: () {
@@ -308,7 +292,9 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                                             Text(
                                               'See More',
                                               style: GoogleFonts.bebasNeue(
-                                                  fontSize: 15.sp),
+                                                  fontSize: context.isTablet
+                                                      ? 10.sp
+                                                      : 15.sp),
                                             )
                                           ],
                                         ),
@@ -336,7 +322,8 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                       boxShadow: [boxShadow]),
                   child: Text(
                     'DLC',
-                    style: GoogleFonts.bebasNeue(fontSize: 15.sp),
+                    style: GoogleFonts.bebasNeue(
+                        fontSize: context.isTablet ? 10.sp : 15.sp),
                   ),
                 ),
               ),
@@ -379,8 +366,7 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                       );
                     } else {
                       return SizedBox(
-                        height: 45.h,
-                        width: 100.w,
+                        height: context.isTablet ? 46.h : 50.h,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount:
@@ -391,12 +377,12 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                                       margin: EdgeInsets.only(
                                           top: 1.h, bottom: 5.h, left: 2.h),
                                       decoration: BoxDecoration(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .secondary,
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          boxShadow: [boxShadow]),
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: [boxShadow],
+                                      ),
                                       width: 20.w,
                                       child: InkWell(
                                         onTap: () {
@@ -425,7 +411,9 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                                             Text(
                                               'See More',
                                               style: GoogleFonts.bebasNeue(
-                                                  fontSize: 15.sp),
+                                                  fontSize: context.isTablet
+                                                      ? 10.sp
+                                                      : 15.sp),
                                             )
                                           ],
                                         ),

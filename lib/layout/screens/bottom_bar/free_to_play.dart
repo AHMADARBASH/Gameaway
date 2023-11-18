@@ -7,7 +7,9 @@ import 'package:gameaway/blocs/freetoplay/freetoplay_cubit.dart';
 import 'package:gameaway/blocs/freetoplay/freetoplay_states.dart';
 import 'package:gameaway/data/constants/categories.dart';
 import 'package:gameaway/layout/screens/freetoplay/more_freetoplay_screen.dart';
+import 'package:gameaway/layout/widgets/category_widget.dart';
 import 'package:gameaway/layout/widgets/freetoplay.dart';
+import 'package:gameaway/utilities/context_extenstions.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
@@ -39,6 +41,10 @@ class _FreetoPlayScreenState extends State<FreetoPlayScreen> {
       blurRadius: 1,
       offset: const Offset(1, 1),
     );
+    TextStyle textStyle = Theme.of(context)
+        .textTheme
+        .bodyMedium!
+        .copyWith(fontSize: context.isTablet ? 12.sp : 15.sp);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -52,7 +58,7 @@ class _FreetoPlayScreenState extends State<FreetoPlayScreen> {
                 duration: const Duration(milliseconds: 500),
                 child: Text(
                   'Categories',
-                  style: GoogleFonts.bebasNeue(fontSize: 20.sp),
+                  style: textStyle,
                 ),
               ),
               BlocBuilder<FreetoPlayCubit, FreetoPlayState>(
@@ -90,67 +96,22 @@ class _FreetoPlayScreenState extends State<FreetoPlayScreen> {
                                           category: categories[index]['name']);
                                 }
                               },
-                              child: AnimatedContainer(
-                                duration: const Duration(milliseconds: 200),
-                                margin: const EdgeInsets.all(4),
-                                padding: const EdgeInsets.only(
-                                    right: 8, top: 4, bottom: 4),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(30),
-                                    border: categoryIndex ==
-                                            categories[index]['index']
-                                        ? Border.all(
-                                            color: Colors.blue, width: 2)
-                                        : Border.all(
-                                            color: Colors.transparent,
-                                            width: 1),
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                    boxShadow: [boxShadow]),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Theme.of(context).canvasColor,
-                                      ),
-                                      width: 40.sp,
-                                      height: 40.sp,
-                                      child: Center(
-                                        child: Image.asset(
-                                          categories[index]['logo'],
-                                          width: 25.sp,
-                                          height: 20.sp,
-                                          color: categories[index]['color'],
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      ' ${categories[index]['name']}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!
-                                          .copyWith(fontSize: 12.sp),
-                                    ),
-                                  ],
-                                ),
+                              child: CategoryWidget(
+                                index: index,
+                                globalIndex: categoryIndex,
+                                categories: categories,
                               ),
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 30,
+                        SizedBox(
+                          height: context.isTablet ? 10.sp : 20.sp,
                         ),
                         Row(
                           children: [
                             Text(
                               categotyName == '' ? 'All' : categotyName,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(fontSize: 20.sp),
+                              style: textStyle,
                             ),
                           ],
                         ),
@@ -162,7 +123,7 @@ class _FreetoPlayScreenState extends State<FreetoPlayScreen> {
               SizedBox(
                 height: 1.h,
               ),
-              FadeInUp(
+              FadeInRight(
                 duration: const Duration(milliseconds: 1000),
                 delay: const Duration(milliseconds: 500),
                 child: BlocBuilder<FreetoPlayCubit, FreetoPlayState>(
@@ -223,19 +184,15 @@ class _FreetoPlayScreenState extends State<FreetoPlayScreen> {
                               height: 1.h,
                             ),
                             Text(state.emptyMessage,
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(fontSize: 20.sp)),
+                                textAlign: TextAlign.center, style: textStyle),
                           ],
                         ),
                       );
                     } else {
                       return SizedBox(
-                        height: 67.h,
+                        height: 40.h,
                         child: ListView.builder(
-                          scrollDirection: Axis.vertical,
+                          scrollDirection: Axis.horizontal,
                           itemCount: state.freetoplay.length > 6
                               ? 6
                               : state.freetoplay.length,
@@ -243,7 +200,10 @@ class _FreetoPlayScreenState extends State<FreetoPlayScreen> {
                               state.freetoplay.length > 6 && index == 5
                                   ? Container(
                                       margin: EdgeInsets.only(
-                                          top: 1.h, bottom: 5.h, left: 2.h),
+                                        top: 1.h,
+                                        bottom: 5.h,
+                                        left: 2.h,
+                                      ),
                                       padding: EdgeInsets.all(1.h),
                                       decoration: BoxDecoration(
                                           color: Theme.of(context)
@@ -252,7 +212,6 @@ class _FreetoPlayScreenState extends State<FreetoPlayScreen> {
                                           borderRadius:
                                               BorderRadius.circular(15),
                                           boxShadow: [boxShadow]),
-                                      width: 100.w,
                                       child: InkWell(
                                         borderRadius: BorderRadius.circular(10),
                                         onTap: () {
@@ -265,24 +224,24 @@ class _FreetoPlayScreenState extends State<FreetoPlayScreen> {
                                               MainAxisAlignment.center,
                                           children: [
                                             const CircleAvatar(
-                                                child: Icon(
-                                              Icons.double_arrow,
-                                              color: Colors.white,
-                                            )),
+                                              child: Icon(
+                                                Icons.double_arrow,
+                                                color: Colors.white,
+                                              ),
+                                            ),
                                             const SizedBox(
                                               height: 10,
                                             ),
                                             Text(
                                               'See More',
-                                              style: GoogleFonts.bebasNeue(
-                                                  fontSize: 15.sp),
+                                              style: textStyle,
                                             )
                                           ],
                                         ),
                                       ),
                                     )
                                   : FreetoPlayWidget(
-                                      width: 95.w,
+                                      width: 80.w,
                                       freetoPlay: state.freetoplay[index],
                                     ),
                         ),

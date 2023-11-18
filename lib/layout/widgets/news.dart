@@ -42,14 +42,14 @@ class _NewsWidgetState extends State<NewsWidget> {
           Container(
             margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
             width: widget.width,
-            height: 25.h,
+            height: 30.h,
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.secondary,
               borderRadius: BorderRadius.circular(10),
               boxShadow: [boxShadow],
               image: DecorationImage(
                 image: CachedNetworkImageProvider(
-                  widget.news.thumbnail,
+                  widget.news.mainImage,
                 ),
                 fit: BoxFit.cover,
                 alignment: Alignment.topCenter,
