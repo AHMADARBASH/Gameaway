@@ -144,6 +144,13 @@ final Map<String, dynamic> _platforms = {
     "logo": "assets/images/origin.png",
     "index": 17
   },
+  "Ubisoft Connect": {
+    "name": "ubisoft",
+    "value": "ubisoft",
+    "logo": "assets/images/ubisoft.png",
+    "color": const Color(0xff91AED8),
+    "index": 18
+  }
 };
 
 class GiveawayDetailsScreen extends StatefulWidget {
