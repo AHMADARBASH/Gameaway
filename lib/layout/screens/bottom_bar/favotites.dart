@@ -115,7 +115,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             _isGiveaway
                 ? BlocBuilder<GiveawayFavoritesCubit, GiveawayFavoritesState>(
                     builder: (context, state) => FadeInUp(
-                      duration: const Duration(milliseconds: 1000),
+                      duration: const Duration(milliseconds: 800),
                       child: state is GiveawayFavoritesEmptyState
                           ? Column(
                               children: [
@@ -144,7 +144,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                 : BlocBuilder<FreetoPlayFavoritesCubit,
                     FreetoPlayFavoritesState>(
                     builder: (context, state) => FadeInUp(
-                      duration: const Duration(milliseconds: 1000),
+                      duration: const Duration(milliseconds: 800),
                       child: state is FreetoPlayFavoritesEmptyState
                           ? Column(
                               children: [

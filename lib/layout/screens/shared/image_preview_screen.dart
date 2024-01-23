@@ -41,7 +41,8 @@ class _ImagePreviewScreenState extends State<ImagePreviewScreen> {
               : widget.freetoPlay!.id,
           child: SizedBox(
             width: context.width,
-            height: context.height * 0.7,
+            height:
+                context.isTablet ? context.height * 0.7 : context.height * 0.30,
             child: CachedNetworkImage(
               imageUrl: widget.giveaway == null
                   ? widget.freetoPlay!.thumbnail

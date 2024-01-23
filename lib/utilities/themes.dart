@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 Map<String, dynamic> themes = {
   'whiteTheme': ThemeData(
+    useMaterial3: true,
+    scaffoldBackgroundColor: const Color(0xfff2f1f7),
     appBarTheme:
         const AppBarTheme(backgroundColor: Colors.transparent, elevation: 0),
     canvasColor: const Color(0xfff2f1f7),
@@ -19,6 +21,8 @@ Map<String, dynamic> themes = {
     shadowColor: Colors.grey[200]!,
   ),
   'darkTheme': ThemeData(
+    useMaterial3: true,
+    scaffoldBackgroundColor: const Color(0xff0f1416),
     appBarTheme: AppBarTheme(backgroundColor: Colors.blueGrey[900]!),
     canvasColor: const Color(0xff0f1416),
     colorScheme: ColorScheme.fromSwatch().copyWith(

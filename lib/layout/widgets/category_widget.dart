@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gameaway/utilities/context_extenstions.dart';
 import 'package:sizer/sizer.dart';
 
+// ignore: must_be_immutable
 class CategoryWidget extends StatefulWidget {
   var globalIndex;
   var index;
