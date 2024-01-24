@@ -63,7 +63,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   }
                 },
                 activeColor: Theme.of(context).colorScheme.primary,
-                inactiveTrackColor: Theme.of(context).colorScheme.primary,
+                inactiveThumbColor: Colors.grey,
                 value: _isDarkTheme ||
                         LocalData.getData(key: 'theme') == 'darkTheme'
                     ? true

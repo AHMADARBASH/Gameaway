@@ -23,7 +23,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
       overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
-  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await DatabaseHelper.createDatabase();
   await LocalData.init();
   await Future.delayed(const Duration(seconds: 1));

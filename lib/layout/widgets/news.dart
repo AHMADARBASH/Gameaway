@@ -59,7 +59,7 @@ class _NewsWidgetState extends State<NewsWidget> {
           ),
           Container(
             height: 12.h,
-            width: widget.width,
+            width: widget.width * 0.95,
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
