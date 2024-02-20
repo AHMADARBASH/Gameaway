@@ -366,7 +366,7 @@ class _GiveawayDetailsScreenState extends State<GiveawayDetailsScreen> {
                           ),
                         ],
                       ),
-                      Spacer(),
+                      const Spacer(),
                       FadeInRight(
                         delay: const Duration(milliseconds: 500),
                         duration: duration,
@@ -505,7 +505,7 @@ class _GiveawayDetailsScreenState extends State<GiveawayDetailsScreen> {
                                       widget.giveaway.instructions, context)),
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           FadeInUp(
                               delay: const Duration(milliseconds: 800),
                               duration: duration,
@@ -822,7 +822,7 @@ class _GiveawayDetailsScreenState extends State<GiveawayDetailsScreen> {
                                                   ),
                                                 ],
                                               ),
-                                              Spacer(),
+                                              const Spacer(),
                                               FadeInUp(
                                                 delay: const Duration(
                                                     milliseconds: 1000),

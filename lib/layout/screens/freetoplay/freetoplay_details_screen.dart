@@ -249,7 +249,7 @@ class _FreetoPlayDetailsScreenState extends State<FreetoPlayDetailsScreen> {
                           ),
                         ],
                       ),
-                      Spacer(),
+                      const Spacer(),
                       FadeInRight(
                         delay: const Duration(milliseconds: 500),
                         duration: duration,

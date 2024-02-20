@@ -4,8 +4,7 @@ import 'dart:convert';
 
 abstract class BaseRepository {
   Future<dynamic> getDatafromAPI({required String customURL}) async {
-    final url = Uri.parse(customURL);
-    final response = await http.get(url).timeout(
+    final response = await http.get(Uri.parse(customURL)).timeout(
       const Duration(seconds: 5),
       onTimeout: () {
         throw HTTPException(message: 'Time out');

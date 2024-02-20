@@ -29,9 +29,7 @@ class DatabaseHelper {
 
   static Future<List<Map<String, dynamic>>> getDatafromDatabase(
       {required String tableName}) async {
-    List<Map<String, dynamic>> data = [];
-    data = await _instance.rawQuery('Select * from $tableName');
-    return data;
+    return await _instance.rawQuery('Select * from $tableName');
   }
 
   static Future<void> deletefromDatabase(

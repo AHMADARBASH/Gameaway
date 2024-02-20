@@ -2,38 +2,30 @@ import 'package:gameaway/data/repositories/base_repository.dart';
 import '../Models/giveaway.dart';
 
 class GiveawaysRepository extends BaseRepository {
-  Future<List<Giveaway>> _getGiveawaysByType(String type,
-      {String? platform}) async {
-    List<Giveaway> data = [];
+  Future<List<Giveaway>> fetchData(String type, {String? platform}) async {
     String url =
         'https://www.gamerpower.com/api/giveaways?sort-by=value&type=$type';
-
     if (platform != null) {
       url += '&platform=$platform';
     }
-
     List<dynamic> apiData = await super.getDatafromAPI(customURL: url);
-
-    for (var element in apiData) {
-      data.add(Giveaway.fromJson(element));
-    }
-    return data;
+    return apiData.map((e) => Giveaway.fromJson(e)).toList();
   }
 
   Future<List<Giveaway>> getValubaleGiveaways() async {
-    return _getGiveawaysByType('game');
+    return fetchData('game');
   }
 
   Future<List<Giveaway>> getValubaleDLCs() async {
-    return _getGiveawaysByType('loot');
+    return fetchData('loot');
   }
 
   Future<List<Giveaway>> getGiveawaysbyPlatform(
       {required String platform}) async {
-    return _getGiveawaysByType('game', platform: platform);
+    return fetchData('game', platform: platform);
   }
 
   Future<List<Giveaway>> getDlcsbyPlatform({required String platform}) async {
-    return _getGiveawaysByType('loot', platform: platform);
+    return fetchData('loot', platform: platform);
   }
 }
