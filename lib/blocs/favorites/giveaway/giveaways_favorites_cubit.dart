@@ -14,14 +14,10 @@ class GiveawayFavoritesCubit extends Cubit<GiveawayFavoritesState> {
     if (data.isEmpty) {
       emit(GiveawayFavoritesEmptyState());
     } else {
-      List<Giveaway> favorites = [];
-      List<int> ids = [];
-      for (var element in data) {
-        favorites.add(Giveaway.fromJson(element));
-        ids.add(element['id']);
-      }
-      favorites = favorites;
-      ids = ids;
+      data.map((e) {
+        favorites.add(Giveaway.fromJson(e));
+        ids.add(e['id']);
+      });
 
       emit(GiveawayFavoritesUpdateState(favorites: favorites, ids: ids));
     }

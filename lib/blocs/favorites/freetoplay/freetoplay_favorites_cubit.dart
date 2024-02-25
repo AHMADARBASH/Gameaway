@@ -14,14 +14,10 @@ class FreetoPlayFavoritesCubit extends Cubit<FreetoPlayFavoritesState> {
     if (data.isEmpty) {
       emit(FreetoPlayFavoritesEmptyState());
     } else {
-      List<FreetoPlay> favorites = [];
-      List<int> ids = [];
-      for (var element in data) {
-        favorites.add(FreetoPlay.fromJson(element));
-        ids.add(element['id']);
-      }
-      favorites = favorites;
-      ids = ids;
+      data.map((e) {
+        favorites.add(FreetoPlay.fromJson(e));
+        ids.add(e['id']);
+      });
       emit(FreetoPlayFavoritesUpdateState(favorites: favorites, ids: ids));
     }
   }

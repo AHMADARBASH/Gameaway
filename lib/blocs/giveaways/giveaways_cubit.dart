@@ -41,8 +41,8 @@ class GiveawaysCubit extends Cubit<GiveawaysState> {
       emit(GiveawayErrorState(errorMessage: e.message));
     } on SocketException catch (_) {
       emit(GiveawayErrorState(errorMessage: 'Connection Error'));
-    } catch (_) {
-      emit(GiveawayErrorState(errorMessage: _.toString()));
+    } catch (e) {
+      emit(GiveawayErrorState(errorMessage: 'Unkown Error'));
     }
   }
 }
