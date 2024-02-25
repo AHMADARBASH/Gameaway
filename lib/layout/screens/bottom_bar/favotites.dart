@@ -66,7 +66,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                 ),
                 Row(
                   children: [
-                    const Expanded(child: SizedBox.shrink()),
+                    const Expanded(
+                      child: SizedBox.shrink(),
+                    ),
                     GestureDetector(
                       onTap: () {
                         setState(() {
@@ -130,7 +132,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                               ],
                             )
                           : SizedBox(
-                              height: 170.sp,
+                              height: context.isTablet ? 25.h : 74.h,
                               child: ListView.builder(
                                 itemCount: state.favorites.length,
                                 itemBuilder: (context, index) => GiveawayWidget(
@@ -159,7 +161,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                               ],
                             )
                           : SizedBox(
-                              height: 145.sp,
+                              height: context.isTablet ? 25.h : 74.h,
                               child: ListView.builder(
                                 itemCount: state.favorites.length,
                                 itemBuilder: (context, index) =>
