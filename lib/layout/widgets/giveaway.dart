@@ -60,6 +60,7 @@ class _GiveawayWidgetState extends State<GiveawayWidget> {
       },
       child: Column(
         children: [
+          //Image Container
           Container(
             padding: EdgeInsets.only(top: 2.sp),
             margin: EdgeInsets.only(left: 8.sp, right: 8.sp, top: 8.sp),
@@ -80,6 +81,7 @@ class _GiveawayWidgetState extends State<GiveawayWidget> {
             alignment: Alignment.topLeft,
             child: Row(
               children: [
+                //Price Container
                 Container(
                   padding: const EdgeInsets.all(5),
                   margin: const EdgeInsets.only(left: 8, right: 5, bottom: 10),
@@ -94,6 +96,7 @@ class _GiveawayWidgetState extends State<GiveawayWidget> {
                   ),
                 ),
                 const Spacer(),
+                //Favorite Container
                 BlocBuilder<GiveawayFavoritesCubit, GiveawayFavoritesState>(
                   builder: (context, state) => Container(
                     margin: const EdgeInsets.all(5),
@@ -122,6 +125,7 @@ class _GiveawayWidgetState extends State<GiveawayWidget> {
               ],
             ),
           ),
+          //Title Container
           Container(
             height: 18.h,
             width: widget.width,
@@ -147,6 +151,7 @@ class _GiveawayWidgetState extends State<GiveawayWidget> {
                     maxLines: 2,
                   ),
                 ),
+                //Time Container
                 Container(
                   margin: const EdgeInsets.only(top: 10),
                   padding: const EdgeInsets.all(5),
