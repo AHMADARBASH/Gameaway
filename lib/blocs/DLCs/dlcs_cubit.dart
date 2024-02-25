@@ -6,28 +6,32 @@ import 'package:gameaway/utilities/exceptions.dart';
 
 class DLCsCubit extends Cubit<DLCsState> {
   //
-  DLCsCubit()
-      : super(DLCsInitState(
-          dlcs: [],
-        ));
+  DLCsCubit() : super(DLCsInitState(dlcs: []));
 
   final repo = GiveawaysRepository();
+
   bool isInit = false;
+
+  Future<void> errorHandler(dynamic error) async {
+    if (error is EmptyException) {
+      emit(DLCsEmptyState(emptyMessage: error.message));
+    } else if (error is HTTPException) {
+      emit(DLCsErrorState(errorMessage: error.message));
+    } else if (error is SocketException) {
+      emit(DLCsErrorState(errorMessage: 'Connection Error'));
+    } else {
+      emit(DLCsErrorState(errorMessage: 'Unknown Error'));
+    }
+  }
+
   Future<void> getValuableDLCs() async {
     emit(DLCsLoadingState());
-    // List<Giveaway> data = [];
     try {
       final data = await repo.getValubaleDLCs();
       isInit = true;
       emit(DLCsUpdateState(dlcs: data));
-    } on EmptyException catch (e) {
-      emit(DLCsEmptyState(emptyMessage: e.message));
-    } on HTTPException catch (e) {
-      emit(DLCsErrorState(errorMessage: e.message));
-    } on SocketException catch (_) {
-      emit(DLCsErrorState(errorMessage: 'Connection Error'));
-    } catch (_) {
-      emit(DLCsErrorState(errorMessage: 'Unkown Error'));
+    } catch (e) {
+      errorHandler(e);
     }
   }
 
@@ -36,17 +40,9 @@ class DLCsCubit extends Cubit<DLCsState> {
     try {
       final data = await repo.getDlcsbyPlatform(platform: platform);
       isInit = true;
-      emit(DLCsUpdateState(
-        dlcs: data,
-      ));
-    } on EmptyException catch (e) {
-      emit(DLCsEmptyState(emptyMessage: e.message));
-    } on HTTPException catch (e) {
-      emit(DLCsErrorState(errorMessage: e.message));
-    } on SocketException catch (_) {
-      emit(DLCsErrorState(errorMessage: 'Connection Error'));
-    } catch (_) {
-      emit(DLCsErrorState(errorMessage: _.toString()));
+      emit(DLCsUpdateState(dlcs: data));
+    } catch (e) {
+      errorHandler(e);
     }
   }
 }

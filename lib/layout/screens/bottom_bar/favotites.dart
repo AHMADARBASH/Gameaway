@@ -22,8 +22,8 @@ class FavoritesScreen extends StatefulWidget {
 class _FavoritesScreenState extends State<FavoritesScreen> {
   @override
   void initState() {
-    BlocProvider.of<GiveawayFavoritesCubit>(context).getFavorites();
     BlocProvider.of<FreetoPlayFavoritesCubit>(context).getFavorites();
+    BlocProvider.of<GiveawayFavoritesCubit>(context).getFavorites();
     super.initState();
   }
 
@@ -163,13 +163,12 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                           : SizedBox(
                               height: context.isTablet ? 25.h : 74.h,
                               child: ListView.builder(
-                                itemCount: state.favorites.length,
-                                itemBuilder: (context, index) =>
-                                    FreetoPlayWidget(
-                                  width: 95.w,
-                                  freetoPlay: state.favorites[index],
-                                ),
-                              ),
+                                  itemCount: state.favorites.length,
+                                  itemBuilder: (context, index) =>
+                                      FreetoPlayWidget(
+                                        width: 95.w,
+                                        freetoPlay: state.favorites[index],
+                                      )),
                             ),
                     ),
                   ),

@@ -9,21 +9,29 @@ class NewsCubit extends Cubit<NewsState> {
   NewsCubit() : super(NewsInitState());
 
   final repo = NewsRepository();
+
   bool isInit = false;
+
+  Future<void> errorHandler(dynamic error) async {
+    if (error is EmptyException) {
+      emit(NewsEmptyState());
+    } else if (error is HTTPException) {
+      emit(NewsErrorState(errorMessage: error.message));
+    } else if (error is SocketException) {
+      emit(NewsErrorState(errorMessage: 'Connection Error'));
+    } else {
+      emit(NewsErrorState(errorMessage: 'Unknown Error'));
+    }
+  }
+
   Future<void> getNews() async {
     emit(NewsLoadingState());
     try {
       final data = await repo.getAllNews();
       isInit = true;
       emit(NewsUpdatedState(news: data));
-    } on EmptyException catch (_) {
-      emit(NewsEmptyState());
-    } on HTTPException catch (e) {
-      emit(NewsErrorState(errorMessage: e.message));
-    } on SocketException catch (_) {
-      emit(NewsErrorState(errorMessage: 'Connection Error'));
-    } catch (_) {
-      emit(NewsErrorState(errorMessage: 'Unkown Error'));
+    } catch (e) {
+      errorHandler(e);
     }
   }
 }

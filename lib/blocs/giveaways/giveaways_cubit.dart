@@ -9,21 +9,29 @@ class GiveawaysCubit extends Cubit<GiveawaysState> {
   GiveawaysCubit() : super(GiveawayInitState(giveaways: []));
 
   final _repo = GiveawaysRepository();
+
   bool isInit = false;
+
+  Future<void> errorHandler(dynamic error) async {
+    if (error is EmptyException) {
+      emit(GiveawayEmptyState(emptyMessage: error.message));
+    } else if (error is HTTPException) {
+      emit(GiveawayErrorState(errorMessage: error.message));
+    } else if (error is SocketException) {
+      emit(GiveawayErrorState(errorMessage: 'Connection Error'));
+    } else {
+      emit(GiveawayErrorState(errorMessage: 'Unknown Error'));
+    }
+  }
+
   Future<void> getValuableGiveaways() async {
     emit(GiveawayLoadingState());
     try {
       final data = await _repo.getValubaleGiveaways();
       isInit = true;
       emit(GiveawayUpdateState(giveaways: data));
-    } on EmptyException catch (e) {
-      emit(GiveawayEmptyState(emptyMessage: e.message));
-    } on HTTPException catch (e) {
-      emit(GiveawayErrorState(errorMessage: e.message));
-    } on SocketException catch (_) {
-      emit(GiveawayErrorState(errorMessage: 'Connection Error'));
-    } catch (_) {
-      emit(GiveawayErrorState(errorMessage: 'Unkown Error'));
+    } catch (e) {
+      errorHandler(e);
     }
   }
 
@@ -32,17 +40,9 @@ class GiveawaysCubit extends Cubit<GiveawaysState> {
     try {
       final data = await _repo.getGiveawaysbyPlatform(platform: platform);
       isInit = true;
-      emit(GiveawayUpdateState(
-        giveaways: data,
-      ));
-    } on EmptyException catch (e) {
-      emit(GiveawayEmptyState(emptyMessage: e.message));
-    } on HTTPException catch (e) {
-      emit(GiveawayErrorState(errorMessage: e.message));
-    } on SocketException catch (_) {
-      emit(GiveawayErrorState(errorMessage: 'Connection Error'));
+      emit(GiveawayUpdateState(giveaways: data));
     } catch (e) {
-      emit(GiveawayErrorState(errorMessage: 'Unkown Error'));
+      errorHandler(e);
     }
   }
 }
