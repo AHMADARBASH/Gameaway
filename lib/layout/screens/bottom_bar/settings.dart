@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gameaway/blocs/theme/theme_cubit.dart';
 import 'package:gameaway/blocs/theme/theme_state.dart';
-import 'package:gameaway/data/helpers/local_data.dart';
+import 'package:gameaway/data/providers/helpers/cached_data.dart';
 import 'package:gameaway/utilities/context_extenstions.dart';
 import 'package:sizer/sizer.dart';
 
@@ -14,7 +14,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool _isDarkTheme = LocalData.getData(key: 'theme') == 'darkTheme';
+  bool _isDarkTheme = CachedData.getData(key: 'theme') == 'darkTheme';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +65,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 activeColor: Theme.of(context).colorScheme.primary,
                 inactiveThumbColor: Colors.grey,
                 value: _isDarkTheme ||
-                        LocalData.getData(key: 'theme') == 'darkTheme'
+                        CachedData.getData(key: 'theme') == 'darkTheme'
                     ? true
                     : false,
               ),

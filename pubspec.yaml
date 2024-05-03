@@ -56,7 +56,8 @@ dependencies:
   sqflite: ^2.2.0
   sqflite_common_ffi: ^2.2.5
   flutter_animate: ^4.5.0
-  
+  flutter_bounce: ^1.1.0
+  get_it:
 
 
 flutter_native_splash:

@@ -8,6 +8,7 @@ import 'package:gameaway/utilities/context_extenstions.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_bounce/flutter_bounce.dart';
 
 class GiveawayWidget extends StatefulWidget {
   final double width;
@@ -98,27 +99,27 @@ class _GiveawayWidgetState extends State<GiveawayWidget> {
                 const Spacer(),
                 //Favorite Container
                 BlocBuilder<GiveawayFavoritesCubit, GiveawayFavoritesState>(
-                  builder: (context, state) => Container(
-                    margin: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.secondary,
-                        shape: BoxShape.circle),
-                    child: IconButton(
-                      onPressed: () {
-                        state.ids.contains(widget.giveaway.id)
-                            ? BlocProvider.of<GiveawayFavoritesCubit>(context)
-                                .removeFavorite(id: widget.giveaway.id)
-                            : BlocProvider.of<GiveawayFavoritesCubit>(context)
-                                .addFavorite(giveaway: widget.giveaway);
-                      },
-                      icon: Icon(
+                  builder: (context, state) => Bounce(
+                    duration: Duration(milliseconds: 100),
+                    onPressed: () {
+                      state.ids.contains(widget.giveaway.id)
+                          ? BlocProvider.of<GiveawayFavoritesCubit>(context)
+                              .removeFavorite(id: widget.giveaway.id)
+                          : BlocProvider.of<GiveawayFavoritesCubit>(context)
+                              .addFavorite(giveaway: widget.giveaway);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      margin: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.secondary,
+                          shape: BoxShape.circle),
+                      child: Icon(
                         state.ids.contains(widget.giveaway.id)
                             ? Icons.favorite
                             : Icons.favorite_border,
                         color: Theme.of(context).colorScheme.primary,
                       ),
-                      splashColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
                     ),
                   ),
                 )

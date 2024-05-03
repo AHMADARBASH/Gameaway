@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gameaway/data/helpers/local_data.dart';
+import 'package:gameaway/data/providers/helpers/cached_data.dart';
 import 'package:gameaway/layout/screens/shared/home_screen.dart';
 import 'package:gameaway/utilities/context_extenstions.dart';
 import 'package:sizer/sizer.dart';
@@ -64,7 +64,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                       fontSize: context.isTablet ? 10.sp : 15.sp),
                 ),
                 onPressed: () {
-                  LocalData.saveData(key: 'opened', data: 'opened');
+                  CachedData.saveData(key: 'opened', data: 'opened');
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute<void>(
                       builder: (BuildContext context) => HomeScreen(),
@@ -92,7 +92,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 onPressed: () {
                   if (_currentPage == 3) {
-                    LocalData.saveData(key: 'opened', data: 'opened');
+                    CachedData.saveData(key: 'opened', data: 'opened');
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute<void>(
                         builder: (BuildContext context) => HomeScreen(),

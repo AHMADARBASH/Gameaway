@@ -11,6 +11,7 @@ import 'package:gameaway/blocs/favorites/freetoplay/freetoplay_favorites_states.
 import 'package:gameaway/data/Models/freetoplay.dart';
 import 'package:gameaway/layout/screens/shared/image_preview_screen.dart';
 import 'package:gameaway/utilities/context_extenstions.dart';
+import 'package:gameaway/utilities/widget_extenstion.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -639,12 +640,19 @@ class _FreetoPlayDetailsScreenState extends State<FreetoPlayDetailsScreen> {
                 delay: const Duration(milliseconds: 200),
                 duration: duration,
                 child: Container(
+                  padding: EdgeInsets.all(10),
                   margin: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.secondary,
                     shape: BoxShape.circle,
                   ),
-                  child: IconButton(
+                  child: Icon(
+                    state.ids.contains(widget.freetoPlay.id)
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ).bounce(
                     onPressed: () {
                       state.ids.contains(widget.freetoPlay.id)
                           ? BlocProvider.of<FreetoPlayFavoritesCubit>(context)
@@ -652,16 +660,7 @@ class _FreetoPlayDetailsScreenState extends State<FreetoPlayDetailsScreen> {
                           : BlocProvider.of<FreetoPlayFavoritesCubit>(context)
                               .addFavorite(freetoplay: widget.freetoPlay);
                     },
-                    icon: Icon(
-                      state.ids.contains(widget.freetoPlay.id)
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                  ),
-                ),
+                    duration: Duration(milliseconds: 100)),
               ),
             )
           ],

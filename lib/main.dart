@@ -11,8 +11,8 @@ import 'package:gameaway/blocs/nav_bar_index/index_cubit.dart';
 import 'package:gameaway/blocs/news/news_cubit.dart';
 import 'package:gameaway/blocs/theme/theme_cubit.dart';
 import 'package:gameaway/blocs/theme/theme_state.dart';
-import 'package:gameaway/data/helpers/database_helper.dart';
-import 'package:gameaway/data/helpers/local_data.dart';
+import 'package:gameaway/data/providers/helpers/cached_data.dart';
+import 'package:gameaway/data/providers/helpers/database_helper.dart';
 import 'package:gameaway/layout/screens/shared/home_screen.dart';
 import 'package:gameaway/utilities/routes.dart';
 import 'package:gameaway/utilities/themes.dart';
@@ -24,7 +24,7 @@ void main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
       overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
   await DatabaseHelper.createDatabase();
-  await LocalData.init();
+  await CachedData.init();
   await Future.delayed(const Duration(seconds: 1));
   runApp(Gameaway());
 }
@@ -64,7 +64,7 @@ class Gameaway extends StatelessWidget {
           builder: (context, state) => MaterialApp(
             theme: themes[state.theme],
             debugShowCheckedModeBanner: false,
-            home: LocalData.containsKey('opened')
+            home: CachedData.containsKey('opened')
                 ? HomeScreen()
                 : const OnboardingScreen(),
             onGenerateRoute: RouteGenerator.generatedRoute,

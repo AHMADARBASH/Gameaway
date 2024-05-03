@@ -5,6 +5,7 @@ import 'package:gameaway/blocs/favorites/freetoplay/freetoplay_favorites_states.
 import 'package:gameaway/data/Models/freetoplay.dart';
 import 'package:gameaway/layout/screens/freetoplay/freetoplay_details_screen.dart';
 import 'package:gameaway/utilities/context_extenstions.dart';
+import 'package:gameaway/utilities/widget_extenstion.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -78,9 +79,17 @@ class _FreetoPlayWidgetState extends State<FreetoPlayWidget> {
                   builder: (context, state) => Container(
                     margin: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.secondary,
-                        shape: BoxShape.circle),
-                    child: IconButton(
+                      color: Theme.of(context).colorScheme.secondary,
+                      shape: BoxShape.circle,
+                    ),
+                    padding: EdgeInsets.all(10),
+                    child: Icon(
+                      state.ids.contains(widget.freetoPlay.id)
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: context.primaryColor,
+                    ),
+                  ).bounce(
                       onPressed: () {
                         state.ids.contains(widget.freetoPlay.id)
                             ? BlocProvider.of<FreetoPlayFavoritesCubit>(context)
@@ -88,16 +97,7 @@ class _FreetoPlayWidgetState extends State<FreetoPlayWidget> {
                             : BlocProvider.of<FreetoPlayFavoritesCubit>(context)
                                 .addFavorite(freetoplay: widget.freetoPlay);
                       },
-                      icon: Icon(
-                        state.ids.contains(widget.freetoPlay.id)
-                            ? Icons.favorite
-                            : Icons.favorite_border,
-                        color: context.primaryColor,
-                      ),
-                      splashColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                    ),
-                  ),
+                      duration: Duration(milliseconds: 100)),
                 )
               ],
             ),

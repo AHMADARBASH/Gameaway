@@ -1,4 +1,4 @@
-import 'package:gameaway/data/helpers/local_data.dart';
+import 'package:gameaway/data/providers/helpers/cached_data.dart';
 
 abstract class ThemeState {
   String theme;
@@ -8,9 +8,9 @@ abstract class ThemeState {
 class ThemeInitState extends ThemeState {
   ThemeInitState()
       : super(
-            theme: LocalData.getData(key: 'theme') == null
+            theme: CachedData.getData(key: 'theme') == null
                 ? "whiteTheme"
-                : LocalData.getData(key: 'theme')!);
+                : CachedData.getData(key: 'theme')!);
 }
 
 class ChangeThemeState extends ThemeState {

@@ -59,4 +59,11 @@ void main() {
     await future;
     expect(sut.state, isA<GiveawayUpdateState>());
   });
+
+  test('check calls count', () async {
+    await mockRepo.getValubaleGiveaways();
+    verify(
+      () => mockRepo.getValubaleGiveaways(),
+    ).called(1);
+  });
 }

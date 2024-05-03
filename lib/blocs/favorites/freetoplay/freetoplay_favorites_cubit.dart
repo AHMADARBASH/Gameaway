@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gameaway/blocs/favorites/freetoplay/freetoplay_favorites_states.dart';
 import 'package:gameaway/data/Models/freetoplay.dart';
-import 'package:gameaway/data/helpers/database_helper.dart';
+import 'package:gameaway/data/providers/helpers/database_helper.dart';
 
 class FreetoPlayFavoritesCubit extends Cubit<FreetoPlayFavoritesState> {
   FreetoPlayFavoritesCubit() : super(FreetoPlayFavoritesInitState());

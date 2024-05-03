@@ -12,6 +12,7 @@ import 'package:gameaway/data/Models/giveaway.dart';
 import 'package:gameaway/layout/screens/shared/image_preview_screen.dart';
 import 'package:gameaway/layout/widgets/mini_platform.dart';
 import 'package:gameaway/utilities/context_extenstions.dart';
+import 'package:gameaway/utilities/widget_extenstion.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -854,28 +855,27 @@ class _GiveawayDetailsScreenState extends State<GiveawayDetailsScreen> {
                 delay: const Duration(milliseconds: 200),
                 duration: duration,
                 child: Container(
+                  padding: EdgeInsets.all(10),
                   margin: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     color: context.secondaryColor,
                     shape: BoxShape.circle,
                   ),
-                  child: IconButton(
-                    onPressed: () {
-                      state.ids.contains(widget.giveaway.id)
-                          ? BlocProvider.of<GiveawayFavoritesCubit>(context)
-                              .removeFavorite(id: widget.giveaway.id)
-                          : BlocProvider.of<GiveawayFavoritesCubit>(context)
-                              .addFavorite(giveaway: widget.giveaway);
-                    },
-                    icon: Icon(
-                      state.ids.contains(widget.giveaway.id)
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      color: context.primaryColor,
-                    ),
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
+                  child: Icon(
+                    state.ids.contains(widget.giveaway.id)
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                    color: context.primaryColor,
                   ),
+                ).bounce(
+                  onPressed: () {
+                    state.ids.contains(widget.giveaway.id)
+                        ? BlocProvider.of<GiveawayFavoritesCubit>(context)
+                            .removeFavorite(id: widget.giveaway.id)
+                        : BlocProvider.of<GiveawayFavoritesCubit>(context)
+                            .addFavorite(giveaway: widget.giveaway);
+                  },
+                  duration: Duration(milliseconds: 100),
                 ),
               ),
             )

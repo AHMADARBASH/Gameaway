@@ -12,6 +12,8 @@ import 'package:gameaway/layout/screens/giveaway/more_giveaways_screen.dart';
 import 'package:gameaway/layout/widgets/category_widget.dart';
 import 'package:gameaway/layout/widgets/giveaway.dart';
 import 'package:gameaway/utilities/context_extenstions.dart';
+import 'package:flutter_bounce/flutter_bounce.dart' as bounce;
+import 'package:gameaway/utilities/widget_extenstion.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import '../../../data/constants/platforms.dart';
@@ -89,9 +91,12 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: platforms.length,
-                              itemBuilder: (context, index) => InkWell(
-                                  borderRadius: BorderRadius.circular(30),
-                                  onTap: () async {
+                              itemBuilder: (context, index) => CategoryWidget(
+                                index: index,
+                                globalIndex: platformIndex,
+                                categories: platforms,
+                              ).bounce(
+                                  onPressed: () {
                                     if (state is GiveawayLoadingState ||
                                         dlcsState is DLCsLoadingState) {
                                       return;
@@ -119,11 +124,7 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                                                   ['value']);
                                     }
                                   },
-                                  child: CategoryWidget(
-                                    index: index,
-                                    globalIndex: platformIndex,
-                                    categories: platforms,
-                                  )),
+                                  duration: Duration(milliseconds: 100)),
                             ),
                           ),
                           SizedBox(
