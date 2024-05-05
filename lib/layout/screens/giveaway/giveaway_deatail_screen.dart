@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gameaway/blocs/favorites/giveaway/giveaways_favorites_cubit.dart';
 import 'package:gameaway/blocs/favorites/giveaway/giveaways_favorites_states.dart';
 import 'package:gameaway/data/Models/giveaway.dart';
@@ -15,6 +14,7 @@ import 'package:gameaway/utilities/context_extenstions.dart';
 import 'package:gameaway/utilities/widget_extenstion.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
+import 'package:toastification/toastification.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 final Map<String, dynamic> _platforms = {
@@ -168,10 +168,8 @@ class _GiveawayDetailsScreenState extends State<GiveawayDetailsScreen> {
   late List<String> stringList;
   final duration = const Duration(milliseconds: 800);
 
-  final ftoast = FToast();
   @override
   void initState() {
-    ftoast.init(context);
     stringList =
         widget.giveaway.platforms.split(", ").map((e) => e.trim()).toList();
     super.initState();
@@ -183,7 +181,6 @@ class _GiveawayDetailsScreenState extends State<GiveawayDetailsScreen> {
         overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
     SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(statusBarColor: Colors.grey.withOpacity(0.2)));
-    ftoast.removeCustomToast();
     super.dispose();
   }
 
@@ -313,26 +310,23 @@ class _GiveawayDetailsScreenState extends State<GiveawayDetailsScreen> {
                     try {
                       await _launchUrl(Uri.parse(widget.giveaway.openGiveaway));
                     } catch (_) {
-                      ftoast.showToast(
-                          toastDuration: const Duration(seconds: 2),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 5),
-                            decoration: BoxDecoration(
-                                color: Colors.grey,
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'unable to open URL',
-                                  style: GoogleFonts.bebasNeue(
-                                      fontSize: 15.sp, color: Colors.white),
-                                ),
-                              ],
-                            ),
-                          ));
+                      toastification.show(
+                          title: Text(
+                            'unable to open URL',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(fontSize: 15.sp),
+                          ),
+                          showProgressBar: true,
+                          type: ToastificationType.error,
+                          style: ToastificationStyle.flatColored,
+                          alignment: Alignment.bottomCenter,
+                          animationDuration: const Duration(milliseconds: 300),
+                          backgroundColor: context.canvasColor,
+                          autoCloseDuration: const Duration(seconds: 3),
+                          foregroundColor: Colors.white,
+                          applyBlurEffect: true);
                     }
                   },
                   child: Container(
@@ -735,38 +729,32 @@ class _GiveawayDetailsScreenState extends State<GiveawayDetailsScreen> {
                                               await _launchUrl(Uri.parse(widget
                                                   .giveaway.openGiveaway));
                                             } catch (_) {
-                                              ftoast.showToast(
-                                                  toastDuration: const Duration(
-                                                      seconds: 2),
-                                                  child: Container(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 20,
-                                                        vertical: 5),
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.grey,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20)),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Text(
-                                                          'unable to open URL',
-                                                          style: GoogleFonts
-                                                              .bebasNeue(
-                                                                  fontSize:
-                                                                      15.sp,
-                                                                  color: Colors
-                                                                      .white),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ));
+                                              toastification.show(
+                                                  title: Text(
+                                                    'unable to open URL',
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyMedium!
+                                                        .copyWith(
+                                                            fontSize: 15.sp),
+                                                  ),
+                                                  showProgressBar: true,
+                                                  type:
+                                                      ToastificationType.error,
+                                                  style: ToastificationStyle
+                                                      .flatColored,
+                                                  alignment:
+                                                      Alignment.bottomCenter,
+                                                  animationDuration:
+                                                      const Duration(
+                                                          milliseconds: 300),
+                                                  backgroundColor:
+                                                      context.canvasColor,
+                                                  autoCloseDuration:
+                                                      const Duration(
+                                                          seconds: 3),
+                                                  foregroundColor: Colors.white,
+                                                  applyBlurEffect: true);
                                             }
                                           },
                                           child: Container(
