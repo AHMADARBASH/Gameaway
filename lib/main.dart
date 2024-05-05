@@ -18,6 +18,7 @@ import 'package:gameaway/utilities/routes.dart';
 import 'package:gameaway/utilities/themes.dart';
 import 'package:sizer/sizer.dart';
 import 'package:gameaway/layout/screens/shared/on_boarding_screen.dart';
+import 'package:toastification/toastification.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -61,13 +62,15 @@ class Gameaway extends StatelessWidget {
           ),
         ],
         child: BlocBuilder<ThemeCubit, ThemeState>(
-          builder: (context, state) => MaterialApp(
-            theme: themes[state.theme],
-            debugShowCheckedModeBanner: false,
-            home: CachedData.containsKey('opened')
-                ? HomeScreen()
-                : const OnboardingScreen(),
-            onGenerateRoute: RouteGenerator.generatedRoute,
+          builder: (context, state) => ToastificationWrapper(
+            child: MaterialApp(
+              theme: themes[state.theme],
+              debugShowCheckedModeBanner: false,
+              home: CachedData.containsKey('opened')
+                  ? HomeScreen()
+                  : const OnboardingScreen(),
+              onGenerateRoute: RouteGenerator.generatedRoute,
+            ),
           ),
         ),
       ),

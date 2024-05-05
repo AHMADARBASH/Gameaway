@@ -12,7 +12,6 @@ import 'package:gameaway/layout/screens/giveaway/more_giveaways_screen.dart';
 import 'package:gameaway/layout/widgets/category_widget.dart';
 import 'package:gameaway/layout/widgets/giveaway.dart';
 import 'package:gameaway/utilities/context_extenstions.dart';
-import 'package:flutter_bounce/flutter_bounce.dart' as bounce;
 import 'package:gameaway/utilities/widget_extenstion.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
