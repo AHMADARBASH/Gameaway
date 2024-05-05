@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gameaway/blocs/theme/theme_cubit.dart';
 import 'package:gameaway/blocs/theme/theme_state.dart';
-import 'package:gameaway/data/providers/helpers/cached_data.dart';
+import 'package:gameaway/data/Dataproviders/helpers/cached_data.dart';
 import 'package:gameaway/utilities/context_extenstions.dart';
 import 'package:sizer/sizer.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gameaway/blocs/favorites/giveaway/giveaways_favorites_states.dart';
 import 'package:gameaway/data/Models/giveaway.dart';
-import 'package:gameaway/data/providers/helpers/database_helper.dart';
+import 'package:gameaway/data/Dataproviders/helpers/database_helper.dart';
 
 class GiveawayFavoritesCubit extends Cubit<GiveawayFavoritesState> {
   GiveawayFavoritesCubit() : super(GiveawayFavoritesInitState());

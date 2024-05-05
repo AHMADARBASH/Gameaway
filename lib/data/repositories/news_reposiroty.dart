@@ -1,5 +1,5 @@
 import 'package:gameaway/data/Models/news.dart';
-import 'package:gameaway/data/providers/base_repository.dart';
+import 'package:gameaway/data/Dataproviders/base_repository.dart';
 
 class NewsRepository extends BaseRepository {
   Future<List<News>> getAllNews() async {

@@ -1,4 +1,4 @@
-import 'package:gameaway/data/providers/base_repository.dart';
+import 'package:gameaway/data/Dataproviders/base_repository.dart';
 import '../Models/giveaway.dart';
 
 class GiveawaysRepository extends BaseRepository {

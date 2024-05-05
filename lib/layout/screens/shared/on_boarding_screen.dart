@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gameaway/data/providers/helpers/cached_data.dart';
+import 'package:gameaway/data/Dataproviders/helpers/cached_data.dart';
 import 'package:gameaway/layout/screens/shared/home_screen.dart';
 import 'package:gameaway/utilities/context_extenstions.dart';
 import 'package:sizer/sizer.dart';

@@ -1,4 +1,4 @@
-import 'package:gameaway/data/providers/helpers/cached_data.dart';
+import 'package:gameaway/data/Dataproviders/helpers/cached_data.dart';
 
 abstract class ThemeState {
   String theme;

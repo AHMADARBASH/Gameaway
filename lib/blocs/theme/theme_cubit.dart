@@ -1,6 +1,6 @@
 import 'package:gameaway/blocs/theme/theme_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gameaway/data/providers/helpers/cached_data.dart';
+import 'package:gameaway/data/Dataproviders/helpers/cached_data.dart';
 
 class ThemeCubit extends Cubit<ThemeState> {
   ThemeCubit() : super(ThemeInitState());
