@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
     const NewsScreen(),
     const SettingsScreen(),
   ];
-  DateTime timeBackPressed = DateTime.now();
+  static DateTime timeBackPressed = DateTime.now();
 
   @override
   Widget build(BuildContext context) {

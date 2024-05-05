@@ -9,6 +9,7 @@ import 'package:gameaway/blocs/giveaways/giveaways_cubit.dart';
 import 'package:gameaway/blocs/giveaways/giveaways_states.dart';
 import 'package:gameaway/layout/screens/giveaway/more_dlcs_screen.dart';
 import 'package:gameaway/layout/screens/giveaway/more_giveaways_screen.dart';
+import 'package:gameaway/layout/screens/shared/home_screen.dart';
 import 'package:gameaway/layout/widgets/category_widget.dart';
 import 'package:gameaway/layout/widgets/giveaway.dart';
 import 'package:gameaway/utilities/context_extenstions.dart';
@@ -42,6 +43,8 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
 
   @override
   Widget build(BuildContext context) {
+    HomeScreen.timeBackPressed =
+        DateTime.now().subtract(const Duration(seconds: 3));
     final boxShadow = BoxShadow(
       color: Theme.of(context).shadowColor,
       spreadRadius: 1,
