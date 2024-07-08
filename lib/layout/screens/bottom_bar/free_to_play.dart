@@ -64,7 +64,7 @@ class _FreetoPlayScreenState extends State<FreetoPlayScreen> {
               BlocBuilder<FreetoPlayCubit, FreetoPlayState>(
                 builder: (context, state) => FadeInDown(
                   delay: const Duration(milliseconds: 300),
-                  duration: const Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 300),
                   curve: Curves.easeOutQuart,
                   child: StatefulBuilder(
                     builder: (context, newSetState) => Column(
@@ -109,9 +109,22 @@ class _FreetoPlayScreenState extends State<FreetoPlayScreen> {
                         ),
                         Row(
                           children: [
-                            Text(
-                              categotyName == '' ? 'All' : categotyName,
-                              style: textStyle,
+                            FadeInRight(
+                              delay: const Duration(milliseconds: 400),
+                              duration: const Duration(milliseconds: 300),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 5, horizontal: 10),
+                                decoration: BoxDecoration(
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
+                                    borderRadius: BorderRadius.circular(20),
+                                    boxShadow: [boxShadow]),
+                                child: Text(
+                                  categotyName == '' ? 'All' : categotyName,
+                                  style: textStyle,
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -124,7 +137,7 @@ class _FreetoPlayScreenState extends State<FreetoPlayScreen> {
                 height: 1.h,
               ),
               FadeInRight(
-                duration: const Duration(milliseconds: 1000),
+                duration: const Duration(milliseconds: 400),
                 delay: const Duration(milliseconds: 500),
                 child: BlocBuilder<FreetoPlayCubit, FreetoPlayState>(
                   builder: (context, state) {

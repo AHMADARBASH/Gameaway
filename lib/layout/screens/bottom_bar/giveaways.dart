@@ -83,7 +83,7 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                     BlocBuilder<GiveawaysCubit, GiveawaysState>(
                   builder: (context, state) => FadeInDown(
                     delay: const Duration(milliseconds: 300),
-                    duration: const Duration(milliseconds: 500),
+                    duration: const Duration(milliseconds: 400),
                     curve: Curves.easeOutQuart,
                     child: StatefulBuilder(
                       builder: (context, newSetState) => Column(
@@ -98,35 +98,36 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                                 globalIndex: platformIndex,
                                 categories: platforms,
                               ).bounce(
-                                  onPressed: () {
-                                    if (state is GiveawayLoadingState ||
-                                        dlcsState is DLCsLoadingState) {
-                                      return;
-                                    }
-                                    if (platformIndex ==
-                                        platforms[index]['index']) {
-                                      platformIndex = 0;
-                                      platformName = '';
-                                      newSetState(() {});
-                                      BlocProvider.of<GiveawaysCubit>(context)
-                                          .getValuableGiveaways();
-                                      BlocProvider.of<DLCsCubit>(context)
-                                          .getValuableDLCs();
-                                    } else {
-                                      platformIndex = platforms[index]['index'];
-                                      platformName = platforms[index]['name'];
-                                      newSetState(() {});
-                                      BlocProvider.of<GiveawaysCubit>(context)
-                                          .getGiveawaysbyPlatform(
-                                              platform: platforms[index]
-                                                  ['value']);
-                                      BlocProvider.of<DLCsCubit>(context)
-                                          .getDLCsbyPlatform(
-                                              platform: platforms[index]
-                                                  ['value']);
-                                    }
-                                  },
-                                  duration: Duration(milliseconds: 100)),
+                                onPressed: () {
+                                  if (state is GiveawayLoadingState ||
+                                      dlcsState is DLCsLoadingState) {
+                                    return;
+                                  }
+                                  if (platformIndex ==
+                                      platforms[index]['index']) {
+                                    platformIndex = 0;
+                                    platformName = '';
+                                    newSetState(() {});
+                                    BlocProvider.of<GiveawaysCubit>(context)
+                                        .getValuableGiveaways();
+                                    BlocProvider.of<DLCsCubit>(context)
+                                        .getValuableDLCs();
+                                  } else {
+                                    platformIndex = platforms[index]['index'];
+                                    platformName = platforms[index]['name'];
+                                    newSetState(() {});
+                                    BlocProvider.of<GiveawaysCubit>(context)
+                                        .getGiveawaysbyPlatform(
+                                            platform: platforms[index]
+                                                ['value']);
+                                    BlocProvider.of<DLCsCubit>(context)
+                                        .getDLCsbyPlatform(
+                                            platform: platforms[index]
+                                                ['value']);
+                                  }
+                                },
+                                duration: Duration(milliseconds: 100),
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -157,7 +158,7 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                 height: 2.h,
               ),
               FadeInRight(
-                duration: const Duration(milliseconds: 1000),
+                duration: const Duration(milliseconds: 300),
                 delay: const Duration(milliseconds: 500),
                 child: Container(
                   padding:
@@ -175,8 +176,8 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                 ),
               ),
               FadeInRight(
-                duration: const Duration(milliseconds: 1000),
-                delay: const Duration(milliseconds: 500),
+                duration: const Duration(milliseconds: 300),
+                delay: const Duration(milliseconds: 400),
                 child: BlocBuilder<GiveawaysCubit, GiveawaysState>(
                   builder: (context, state) {
                     if (state is GiveawayErrorState) {
@@ -314,8 +315,8 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                 ),
               ),
               FadeInRight(
-                delay: const Duration(milliseconds: 700),
-                duration: const Duration(milliseconds: 800),
+                delay: const Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 600),
                 child: Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
@@ -331,8 +332,8 @@ class _GiveawaysScreenState extends State<GiveawaysScreen> {
                 ),
               ),
               FadeInRight(
-                delay: const Duration(milliseconds: 700),
-                duration: const Duration(milliseconds: 800),
+                delay: const Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 600),
                 child: BlocBuilder<DLCsCubit, DLCsState>(
                   builder: (context, state) {
                     if (state is DLCsErrorState) {
