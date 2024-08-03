@@ -14,7 +14,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.0.0'  # Replace with your desired Flutter version
+          flutter-version: 'latest-stable'  # Replace with your desired Flutter version
 
       - name: Configure environment variables
         run: |
